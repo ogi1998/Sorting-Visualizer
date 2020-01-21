@@ -76,12 +76,12 @@ export default class SortingVisualizer extends Component {
 				))}
 				<br />
 				<button onClick={() => this.resetArray()}>Generate New Array</button>
-				<button onClick={() => this.mergeSort()}>Merge Sort</button>
+				{/* <button onClick={() => this.mergeSort()}>Merge Sort</button> */}
 				<button onClick={() => this.bubbleSort()}>Bubble Sort</button>
 				<button onClick={() => this.selectionSort()}>Selection Sort</button>
 				<button onClick={() => this.insertionSort()}>Insertion Sort</button>
-				<button onClick={() => this.resetArray()}>Quick Sort</button>
-				<button onClick={() => this.resetArray()}>Heap Sort</button>
+				{/* <button onClick={() => this.resetArray()}>Quick Sort</button>
+				<button onClick={() => this.resetArray()}>Heap Sort</button> */}
 				<button onClick={() => this.testSortingAlgorithms()}>Test Sort</button>
 			</div>
 		);
