@@ -2,8 +2,9 @@ export const animate = (
   animations,
   speed,
   algorithm,
-  colorFinish,
   colorDefault,
+  colorFinish,
+  colorSorted,
   activeOne,
   activeTwo
 ) => {
@@ -21,11 +22,11 @@ export const animate = (
 				if (animations[i].swap) {
 					document.getElementById(
 					  secondIndex
-					).style.backgroundColor = colorDefault;
+					).style.backgroundColor = colorFinish;
 				  } else {
 					document.getElementById(
 					  firstIndex
-					).style.backgroundColor = colorDefault;
+					).style.backgroundColor = colorFinish;
 				  }
 			}, speed + 1);
 		} 
@@ -34,10 +35,10 @@ export const animate = (
 				if (animations[i].swap) {
 					document.getElementById(
 					  firstIndex
-					).style.backgroundColor = colorDefault;
+					).style.backgroundColor = colorFinish;
 					document.getElementById(
 					  secondIndex
-					).style.backgroundColor = colorDefault;
+					).style.backgroundColor = colorFinish;
 				  }
 			}, speed + 1);
         }
@@ -46,14 +47,14 @@ export const animate = (
 				if (animations[i].swap) {
 				document.getElementById(
 					secondIndex
-				  ).style.backgroundColor = colorDefault;
+				  ).style.backgroundColor = colorFinish;
 				}
 			  }, speed + 1);
           }
       }
       if (i === animations.length - 1) {
         setTimeout(() => {
-          finish(colorFinish, colorDefault);
+          finish(colorSorted, colorFinish);
         }, 100);
       }
     }, i * speed);
@@ -75,7 +76,6 @@ const changeColors = (firstIndex, secondIndex, speed, colorDefault, activeOne, a
   setTimeout(() => {
     els[firstIndex].style.backgroundColor = activeOne;
     els[secondIndex].style.backgroundColor = activeTwo;
-    console.log("red");
   }, speed - 5 * speedMultiplier);
 };
 const swapElements = (
