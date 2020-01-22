@@ -47,6 +47,9 @@ header button {
   font-size: 20px;
   outline: 0;
 }
+header button:disabled {
+  color: rgb(141, 14, 14);
+}
 
 header button:hover {
   cursor: pointer;

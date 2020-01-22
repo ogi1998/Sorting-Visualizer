@@ -6,7 +6,8 @@ export const animate = (
   colorFinish,
   colorSorted,
   activeOne,
-  activeTwo
+  activeTwo,
+  enableButtons
 ) => {
   for (let i = 0; i < animations.length; i++) {
     setTimeout(() => {
@@ -54,8 +55,11 @@ export const animate = (
       }
       if (i === animations.length - 1) {
         setTimeout(() => {
-          finish(colorSorted, colorFinish);
-        }, 100);
+		  finish(colorSorted, colorFinish);
+		}, 100);
+		setTimeout(() => {
+			enableButtons();
+		}, 2000);
       }
     }, i * speed);
   }
