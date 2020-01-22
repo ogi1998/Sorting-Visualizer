@@ -13,12 +13,12 @@ main {
 }
 
 .arr-el {
-  width: 2px;
+  width: 0.2rem;
   background-color: #e87e04;
   display: inline-block;
-  margin: 0 2px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  margin: 0 0.2rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
 header,
@@ -32,20 +32,23 @@ footer {
 }
 
 header h3 {
-  border-right: 1px solid #fff;
+  border-right: 0.1rem solid #fff;
   color: #fff;
-  padding: 0 50px;
-  font-size: 30px;
+  padding: 0 5rem;
+  font-size: 3rem;
 }
 
 header button {
   border: none;
   display: inline-block;
-  padding: 20px 40px;
+  padding: 2rem 4rem;
   background-color:rgb(33, 102, 148);
   color: #fff;
-  font-size: 20px;
+  font-size: 2rem;
   outline: 0;
+}
+header:first-child {
+  padding-left: 0;
 }
 header button:disabled {
   color: rgb(141, 14, 14);
@@ -54,7 +57,21 @@ header button:disabled {
 header button:hover {
   cursor: pointer;
 }
-
+.length {
+  margin-left: 2rem;
+}
+.length label {
+  font-size: 2rem;
+}
+.length input {
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid #fff;
+  width: 15%;
+  color: #fff;
+  outline: 0;
+  font-size: 2rem;
+}
 footer address {
   font-size: 2rem;
 }

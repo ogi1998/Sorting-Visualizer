@@ -12,15 +12,18 @@ const COLOR_ACTIVE_TWO = "#9A12B3"; // LJUBICASTA
 
 export default class SortingVisualizer extends Component {
 	state = {
-		array: [100, 500, 200, 300, 600, 400]
+		array: [100, 500, 200, 300, 600, 400],
+		max: 5
 	};
 
 	componentDidMount() {
 		this.resetArray();
 	}
 	resetArray() {
+
 		const array = [];
-		const length = this.randomIntFromInterval(5, 200);
+		const length = this.state.max;
+		// const length = this.randomIntFromInterval(5, max);
 		for (let i = 0; i < length; i++) {
 			array.push(this.randomIntFromInterval(5, 950));
 		}
@@ -89,18 +92,24 @@ export default class SortingVisualizer extends Component {
 			btns[i].disabled = false;
 		}	
 	}
-
+	changeLength(value) {
+			this.setState({max: value});
+	}
 	render() {
 		const { array } = this.state;
 		return (
 			<div>
 				<header>
 					<h3>SORTING VISUALIZER</h3>
+					<div className="length">
+						<label>Length: </label>
+						<input value={this.state.max} onChange = {(e) => {this.changeLength(e.target.value)}} type="text" id="length-input"/>
+					</div>
 					<button className = "btn" onClick={() => this.resetArray()}>Generate New Array</button>
 					<button className = "btn" onClick={() => this.bubbleSort()}>Bubble Sort</button>
 					<button className = "btn" onClick={() => this.selectionSort()}>Selection Sort</button>
 					<button className = "btn" onClick={() => this.insertionSort()}>Insertion Sort</button>
-					<button className = "btn" onClick={() => this.testSortingAlgorithms()}>Test Sort</button>
+					{/* <button className = "btn" onClick={() => this.testSortingAlgorithms()}>Test Sort</button> */}
 				</header>
 				<main>
 					<div className='array-container'>
@@ -114,7 +123,7 @@ export default class SortingVisualizer extends Component {
 					</div>
 				</main>
 				<footer>
-					<address>Developed by Ognjen Vujasinovic. All Rights reserved &copy;</address>
+					<address>Developed by Ognjen Vujasinovic. All rights reserved &copy;</address>
 				</footer>
 			</div>
 		);
