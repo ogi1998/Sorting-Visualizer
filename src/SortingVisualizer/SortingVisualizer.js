@@ -3,14 +3,14 @@ import * as SortingAlgorithms from '../SortingAlgorithms/SortingAlgorithms';
 import * as SortingAnimations from '../SortingAnimations/SortingAnimations';
 import './SortingVisualizer.css';
 
-const ANIMATION_SPEED = 10;
-const COLOR_DEFAULT = "#16a085";
-const COLOR_FINISH = "#27ae60";
-const COLOR_SORTED = "#2980b9";
+const ANIMATION_SPEED = 100;
+const COLOR_DEFAULT = '#16a085';
+const COLOR_FINISH = '#27ae60';
+const COLOR_SORTED = '#2980b9';
 
 export default class SortingVisualizer extends Component {
 	state = {
-		array: [500, 300, 400, 200]
+		array: [100, 500, 200, 300, 600, 400]
 	};
 
 	componentDidMount() {
@@ -19,25 +19,23 @@ export default class SortingVisualizer extends Component {
 	resetArray() {
 		const array = [];
 		const length = this.randomIntFromInterval(5, 200);
-		for(let i = 0; i < length; i++) {
-		    array.push(this.randomIntFromInterval(5, 950));
+		for (let i = 0; i < length; i++) {
+			array.push(this.randomIntFromInterval(5, 950));
 		}
-		this.setState({array});
+		this.setState({ array });
+		const els = document.getElementsByClassName('arr-el');
+		for (let i = 0; i < els.length; i++) {
+			els[i].style.backgroundColor = COLOR_DEFAULT;
+		}
 	}
-	mergeSort() {
-		
-	}
+	mergeSort() {}
 	bubbleSort() {
-		const animations = SortingAlgorithms.bubbleSort(this.state.array, this.finish);
-		console.log(animations);
+		const animations = SortingAlgorithms.bubbleSort(this.state.array);
 		SortingAnimations.animate(animations, ANIMATION_SPEED, 'bubble', COLOR_SORTED, COLOR_FINISH);
-	}
-	finish() {
-		console.log("Done");
 	}
 	selectionSort() {
 		const animations = SortingAlgorithms.selectionSort(this.state.array);
-		SortingAnimations.animate(animations, ANIMATION_SPEED, 'selection',COLOR_SORTED, COLOR_FINISH);
+		SortingAnimations.animate(animations, ANIMATION_SPEED, 'selection', COLOR_SORTED, COLOR_FINISH);
 	}
 	insertionSort() {
 		const animations = SortingAlgorithms.insertionSort(this.state.array);
@@ -70,19 +68,29 @@ export default class SortingVisualizer extends Component {
 	render() {
 		const { array } = this.state;
 		return (
-			<div className='array-container'>
-				{array.map((value, idx) => (
-					<div className='arr-el' key={idx} id={idx} style={{ height: `${value / 2}px`, width: `${500 / array.length}px`}}></div>
-				))}
-				<br />
-				<button onClick={() => this.resetArray()}>Generate New Array</button>
-				{/* <button onClick={() => this.mergeSort()}>Merge Sort</button> */}
-				<button onClick={() => this.bubbleSort()}>Bubble Sort</button>
-				<button onClick={() => this.selectionSort()}>Selection Sort</button>
-				<button onClick={() => this.insertionSort()}>Insertion Sort</button>
-				{/* <button onClick={() => this.resetArray()}>Quick Sort</button>
-				<button onClick={() => this.resetArray()}>Heap Sort</button> */}
-				<button onClick={() => this.testSortingAlgorithms()}>Test Sort</button>
+			<div>
+				<header>
+					<h3>SORTING VISUALIZER</h3>
+					<button onClick={() => this.resetArray()}>Generate New Array</button>
+					<button onClick={() => this.bubbleSort()}>Bubble Sort</button>
+					<button onClick={() => this.selectionSort()}>Selection Sort</button>
+					<button onClick={() => this.insertionSort()}>Insertion Sort</button>
+					<button onClick={() => this.testSortingAlgorithms()}>Test Sort</button>
+				</header>
+				<main>
+					<div className='array-container'>
+						{array.map((value, idx) => (
+							<div
+								className='arr-el'
+								key={idx}
+								id={idx}
+								style={{ height: `${value / 2}px`, width: `${1000 / array.length}px` }}></div>
+						))}
+					</div>
+				</main>
+				<footer>
+					<address>Developed by Ognjen Vujasinovic. All Rights reserved &copy;</address>
+				</footer>
 			</div>
 		);
 	}
