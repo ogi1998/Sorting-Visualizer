@@ -2,15 +2,17 @@ export const animate = (
   animations,
   speed,
   algorithm,
-  colorBlue,
-  colorGreen
+  colorFinish,
+  colorDefault,
+  activeOne,
+  activeTwo
 ) => {
   for (let i = 0; i < animations.length; i++) {
     setTimeout(() => {
       const { firstIndex, secondIndex } = animations[i].indices;
       const { firstValue, secondValue } = animations[i].values;
       if (animations[i].swap) {
-        changeColors(firstIndex, secondIndex, speed);
+        changeColors(firstIndex, secondIndex, speed, colorDefault, activeOne, activeTwo);
         swapElements(firstIndex, secondIndex, firstValue, secondValue, speed);
       }
       if (animations[i].color) {
@@ -19,11 +21,11 @@ export const animate = (
 				if (animations[i].swap) {
 					document.getElementById(
 					  secondIndex
-					).style.backgroundColor = colorGreen;
+					).style.backgroundColor = colorDefault;
 				  } else {
 					document.getElementById(
 					  firstIndex
-					).style.backgroundColor = colorGreen;
+					).style.backgroundColor = colorDefault;
 				  }
 			}, speed + 1);
 		} 
@@ -32,10 +34,10 @@ export const animate = (
 				if (animations[i].swap) {
 					document.getElementById(
 					  firstIndex
-					).style.backgroundColor = colorGreen;
+					).style.backgroundColor = colorDefault;
 					document.getElementById(
 					  secondIndex
-					).style.backgroundColor = colorGreen;
+					).style.backgroundColor = colorDefault;
 				  }
 			}, speed + 1);
         }
@@ -44,21 +46,21 @@ export const animate = (
 				if (animations[i].swap) {
 				document.getElementById(
 					secondIndex
-				  ).style.backgroundColor = colorGreen;
+				  ).style.backgroundColor = colorDefault;
 				}
 			  }, speed + 1);
           }
       }
       if (i === animations.length - 1) {
         setTimeout(() => {
-          finish(colorBlue, colorGreen);
-        }, 1000);
+          finish(colorFinish, colorDefault);
+        }, 100);
       }
     }, i * speed);
   }
 };
 
-const changeColors = (firstIndex, secondIndex, speed) => {
+const changeColors = (firstIndex, secondIndex, speed, colorDefault, activeOne, activeTwo) => {
   let speedMultiplier = 1;
   if (speed <= 100) {
     speedMultiplier = 10;
@@ -67,12 +69,12 @@ const changeColors = (firstIndex, secondIndex, speed) => {
   }
   const els = document.getElementsByClassName("arr-el");
   setTimeout(() => {
-      els[firstIndex].style.backgroundColor = "#16a085";
-      els[secondIndex].style.backgroundColor = "#16a085";
+      els[firstIndex].style.backgroundColor = colorDefault;
+      els[secondIndex].style.backgroundColor = colorDefault;
   }, speed);
   setTimeout(() => {
-    els[firstIndex].style.backgroundColor = "red";
-    els[secondIndex].style.backgroundColor = "green";
+    els[firstIndex].style.backgroundColor = activeOne;
+    els[secondIndex].style.backgroundColor = activeTwo;
     console.log("red");
   }, speed - 5 * speedMultiplier);
 };
@@ -96,7 +98,7 @@ const finish = (colorBlue, colorGreen) => {
 		setTimeout(() => {
 			els[i].style.backgroundColor = colorBlue;  
 		  }, i * 10)
-	  }, 100);
+	  }, 500);
     setTimeout(() => {
       els[i].style.backgroundColor = colorGreen;
     }, i * 10);

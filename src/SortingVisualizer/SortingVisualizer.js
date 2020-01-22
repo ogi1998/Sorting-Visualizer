@@ -4,9 +4,11 @@ import * as SortingAnimations from '../SortingAnimations/SortingAnimations';
 import './SortingVisualizer.css';
 
 const ANIMATION_SPEED = 100;
-const COLOR_DEFAULT = '#16a085';
+const COLOR_DEFAULT = '#e87e04';
 const COLOR_FINISH = '#27ae60';
 const COLOR_SORTED = '#2980b9';
+const COLOR_ACTIVE_ONE = "#F22613";
+const COLOR_ACTIVE_TWO = "3FC380";
 
 export default class SortingVisualizer extends Component {
 	state = {
@@ -31,15 +33,15 @@ export default class SortingVisualizer extends Component {
 	mergeSort() {}
 	bubbleSort() {
 		const animations = SortingAlgorithms.bubbleSort(this.state.array);
-		SortingAnimations.animate(animations, ANIMATION_SPEED, 'bubble', COLOR_SORTED, COLOR_FINISH);
+		SortingAnimations.animate(animations, ANIMATION_SPEED, 'bubble', COLOR_SORTED, COLOR_FINISH, COLOR_ACTIVE_ONE, COLOR_ACTIVE_TWO);
 	}
 	selectionSort() {
 		const animations = SortingAlgorithms.selectionSort(this.state.array);
-		SortingAnimations.animate(animations, ANIMATION_SPEED, 'selection', COLOR_SORTED, COLOR_FINISH);
+		SortingAnimations.animate(animations, ANIMATION_SPEED, 'selection', COLOR_SORTED, COLOR_FINISH, COLOR_ACTIVE_ONE, COLOR_ACTIVE_TWO);
 	}
 	insertionSort() {
 		const animations = SortingAlgorithms.insertionSort(this.state.array);
-		SortingAnimations.animate(animations, ANIMATION_SPEED, 'insertion', COLOR_SORTED, COLOR_FINISH);
+		SortingAnimations.animate(animations, ANIMATION_SPEED, 'insertion', COLOR_SORTED, COLOR_FINISH, COLOR_ACTIVE_ONE, COLOR_ACTIVE_TWO);
 	}
 	arraysAreEqual(arrayOne, arrayTwo) {
 		if (arrayOne.length !== arrayTwo.length) return false;
