@@ -3,26 +3,38 @@ import * as SortingAlgorithms from '../SortingAlgorithms/SortingAlgorithms';
 import * as SortingAnimations from '../SortingAnimations/SortingAnimations';
 import './SortingVisualizer.css';
 
-const ANIMATION_SPEED = 10;
+// const ANIMATION_SPEED = 10;
 const COLOR_DEFAULT = '#e87e04'; // ZUTA
 const COLOR_FINISH = '#27ae60'; // ZELENA
 const COLOR_SORTED = '#2980b9'; // PLAVA
-const COLOR_ACTIVE_ONE = "#F22613"; // CRVENA
-const COLOR_ACTIVE_TWO = "#9A12B3"; // LJUBICASTA
+const COLOR_ACTIVE_ONE = '#F22613'; // CRVENA
+const COLOR_ACTIVE_TWO = '#9A12B3'; // LJUBICASTA
 
 export default class SortingVisualizer extends Component {
 	state = {
 		array: [100, 500, 200, 300, 600, 400],
-		max: 5
+		max: 5,
+		speed: 10
 	};
 
 	componentDidMount() {
 		this.resetArray();
+		this.setSpeed();
 	}
 	resetArray() {
-
+		const { max } = this.state;
+		if (max === '' || isNaN(max)) {
+			alert('Length must be a number!!!');
+			this.setState({ max: 5 });
+			return false;
+		}
+		if (max < 5 || max > 200) {
+			alert('Length must be a number between 5 and 300!');
+			this.setState({ max: 5 });
+			return false;
+		}
 		const array = [];
-		const length = this.state.max;
+		const length = max;
 		// const length = this.randomIntFromInterval(5, max);
 		for (let i = 0; i < length; i++) {
 			array.push(this.randomIntFromInterval(5, 950));
@@ -33,29 +45,74 @@ export default class SortingVisualizer extends Component {
 			els[i].style.backgroundColor = COLOR_DEFAULT;
 		}
 	}
-	mergeSort() {}
+	setSpeed() {
+		const radios = document.getElementsByName("speed");
+		for (let i = 0; i< radios.length; i++) {
+			if(radios[i].checked) {
+				this.setState({speed: radios[i].defaultValue});
+			}
+		}
+	}
+	resetAll() {
+		this.resetArray();
+		this.setSpeed();
+	}
+
 	bubbleSort() {
+		const {speed} = this.state;
 		this.disableButtons();
 		const animations = SortingAlgorithms.bubbleSort(this.state.array);
-		SortingAnimations.animate(animations, ANIMATION_SPEED, 'bubble', COLOR_DEFAULT, COLOR_FINISH, COLOR_SORTED, COLOR_ACTIVE_ONE, COLOR_ACTIVE_TWO, this.enableButtons);
+		SortingAnimations.animate(
+			animations,
+			speed,
+			'bubble',
+			COLOR_DEFAULT,
+			COLOR_FINISH,
+			COLOR_SORTED,
+			COLOR_ACTIVE_ONE,
+			COLOR_ACTIVE_TWO,
+			this.enableButtons
+		);
 	}
 	selectionSort() {
+		const {speed} = this.state;
 		this.disableButtons();
 		const btns = document.getElementsByClassName('btn');
-		for(let i = 0; i < btns.length; i++) {
+		for (let i = 0; i < btns.length; i++) {
 			btns[i].disabled = true;
 		}
 		const animations = SortingAlgorithms.selectionSort(this.state.array);
-		SortingAnimations.animate(animations, ANIMATION_SPEED, 'selection', COLOR_DEFAULT, COLOR_FINISH, COLOR_SORTED, COLOR_ACTIVE_ONE, COLOR_ACTIVE_TWO, this.enableButtons);
+		SortingAnimations.animate(
+			animations,
+			speed,
+			'selection',
+			COLOR_DEFAULT,
+			COLOR_FINISH,
+			COLOR_SORTED,
+			COLOR_ACTIVE_ONE,
+			COLOR_ACTIVE_TWO,
+			this.enableButtons
+		);
 	}
 	insertionSort() {
+		const {speed} = this.state;
 		this.disableButtons();
 		const btns = document.getElementsByClassName('btn');
-		for(let i = 0; i < btns.length; i++) {
+		for (let i = 0; i < btns.length; i++) {
 			btns[i].disabled = true;
 		}
 		const animations = SortingAlgorithms.insertionSort(this.state.array);
-		SortingAnimations.animate(animations, ANIMATION_SPEED, 'insertion', COLOR_DEFAULT, COLOR_FINISH, COLOR_SORTED, COLOR_ACTIVE_ONE, COLOR_ACTIVE_TWO, this.enableButtons);
+		SortingAnimations.animate(
+			animations,
+			speed,
+			'insertion',
+			COLOR_DEFAULT,
+			COLOR_FINISH,
+			COLOR_SORTED,
+			COLOR_ACTIVE_ONE,
+			COLOR_ACTIVE_TWO,
+			this.enableButtons
+		);
 	}
 	arraysAreEqual(arrayOne, arrayTwo) {
 		if (arrayOne.length !== arrayTwo.length) return false;
@@ -82,18 +139,18 @@ export default class SortingVisualizer extends Component {
 	}
 	disableButtons() {
 		const btns = document.getElementsByClassName('btn');
-		for(let i = 0; i < btns.length; i++) {
+		for (let i = 0; i < btns.length; i++) {
 			btns[i].disabled = true;
 		}
 	}
 	enableButtons() {
 		const btns = document.getElementsByClassName('btn');
-		for(let i = 0; i < btns.length; i++) {
+		for (let i = 0; i < btns.length; i++) {
 			btns[i].disabled = false;
-		}	
+		}
 	}
 	changeLength(value) {
-			this.setState({max: value});
+		this.setState({ max: value });
 	}
 	render() {
 		const { array } = this.state;
@@ -101,14 +158,38 @@ export default class SortingVisualizer extends Component {
 			<div>
 				<header>
 					<h3>SORTING VISUALIZER</h3>
-					<div className="length">
+					<div className='length'>
 						<label>Length: </label>
-						<input value={this.state.max} onChange = {(e) => {this.changeLength(e.target.value)}} type="text" id="length-input"/>
+						<input
+							value={this.state.max}
+							onChange={e => {
+								this.changeLength(e.target.value);
+							}}
+							type='text'
+							id='length-input'
+						/>
 					</div>
-					<button className = "btn" onClick={() => this.resetArray()}>Generate New Array</button>
-					<button className = "btn" onClick={() => this.bubbleSort()}>Bubble Sort</button>
-					<button className = "btn" onClick={() => this.selectionSort()}>Selection Sort</button>
-					<button className = "btn" onClick={() => this.insertionSort()}>Insertion Sort</button>
+					<div className='speed'>
+						<label htmlFor='speed'>Speed: </label>
+						<label htmlFor='speed'>1s</label>
+						<input type='radio' value = "1000" name='speed' id='speed1' />
+						<label htmlFor='speed'>100ms</label>
+						<input type='radio' value = "100" name='speed' id='speed1' />
+						<label htmlFor='speed'>10ms</label>
+						<input defaultChecked type='radio' value = "10" name='speed' id='speed1' />
+					</div>
+					<button className='btn' onClick={() => this.resetAll()}>
+						Generate New Array
+					</button>
+					<button className='btn' onClick={() => this.bubbleSort()}>
+						Bubble Sort
+					</button>
+					<button className='btn' onClick={() => this.selectionSort()}>
+						Selection Sort
+					</button>
+					<button className='btn' onClick={() => this.insertionSort()}>
+						Insertion Sort
+					</button>
 					{/* <button className = "btn" onClick={() => this.testSortingAlgorithms()}>Test Sort</button> */}
 				</header>
 				<main>

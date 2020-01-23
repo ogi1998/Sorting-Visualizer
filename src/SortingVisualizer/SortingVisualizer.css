@@ -34,7 +34,7 @@ footer {
 header h3 {
   border-right: 0.1rem solid #fff;
   color: #fff;
-  padding: 0 5rem;
+  padding: 0 1rem;
   font-size: 3rem;
 }
 
@@ -59,6 +59,7 @@ header button:hover {
 }
 .length {
   margin-left: 2rem;
+  width: 10vw;
 }
 .length label {
   font-size: 2rem;
@@ -67,10 +68,19 @@ header button:hover {
   border: none;
   background: transparent;
   border-bottom: 1px solid #fff;
-  width: 15%;
+  width: 20%;
   color: #fff;
   outline: 0;
   font-size: 2rem;
+}
+.speed label {
+  font-size: 2rem;
+}
+.speed label:first-child {
+  margin-right: 2rem;
+}
+.speed input {
+  margin: 0 1rem;
 }
 footer address {
   font-size: 2rem;
