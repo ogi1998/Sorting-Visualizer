@@ -111,7 +111,6 @@ const changeColors = (
 	  if(algorithm === "bubble") {
 		setTimeout(() => {
 			els[firstIndex].style.backgroundColor = colorDefault;
-			// els[secondIndex].style.backgroundColor = colorDefault;
 		  }, speed);	  
 	  }
   }
@@ -150,7 +149,7 @@ const finish = (colorBlue, colorGreen, speed) => {
         els[i].style.backgroundColor = colorBlue;
       }, i * 10);
     }, 1000);
-    // U slucaju da je prvi najmanji i nismo prosli kroz njega moramo sve prvo obojiti zelenom
+    // U slucaju da su najmanji brojevi na svom mjestu i nismo prosli kroz njih moramo prvo sve obojiti zelenom, a tek onda plavom
     setTimeout(() => {
       els[i].style.backgroundColor = colorGreen;
     }, i * 10);
