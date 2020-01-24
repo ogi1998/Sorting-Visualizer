@@ -141,7 +141,7 @@ const swapElements = (
   }, speed);
 };
 
-const finish = (colorBlue, colorGreen, speed) => {
+const finish = (colorBlue, colorGreen) => {
   const els = document.getElementsByClassName("arr-el");
   for (let i = 0; i < els.length; i++) {
     setTimeout(() => {

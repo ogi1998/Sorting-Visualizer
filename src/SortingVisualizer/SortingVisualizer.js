@@ -13,8 +13,8 @@ const COLOR_ACTIVE_TWO = "#9A12B3"; // LJUBICASTA
 export default class SortingVisualizer extends Component {
   state = {
     array: [100, 200, 300, 400, 600, 500],
-    max: 5,
-    speed: 1000
+    max: 50,
+    speed: 10
   };
 
   componentDidMount() {
@@ -29,13 +29,12 @@ export default class SortingVisualizer extends Component {
       return false;
     }
     if (max < 5 || max > 200) {
-      alert("Length must be a number between 5 and 300!");
+      alert("Length must be a number between 5 and 200!");
       this.setState({ max: 5 });
       return false;
     }
     const array = [];
     const length = max;
-    // const length = this.randomIntFromInterval(5, max);
     for (let i = 0; i < length; i++) {
       array.push(this.randomIntFromInterval(5, 950));
     }
