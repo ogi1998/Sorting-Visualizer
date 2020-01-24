@@ -1,23 +1,23 @@
-export const mergeSort = array => {
-	if (array.length === 1) return array;
+// export const mergeSort = array => {
+// 	if (array.length === 1) return array;
 
-	const middleIndex = Math.floor(array.length / 2);
-	const firstHalf = mergeSort(array.slice(0, middleIndex));
-	const secondHalf = mergeSort(array.slice(middleIndex));
-	const sortedArray = [];
-	let i = 0,
-		j = 0;
-	while (i < firstHalf.length && j < secondHalf.length) {
-		if (firstHalf[i] < secondHalf[j]) {
-			sortedArray.push(firstHalf[i++]);
-		} else {
-			sortedArray.push(secondHalf[j++]);
-		}
-	}
-	while (i < firstHalf.length) sortedArray.push(firstHalf[i++]);
-	while (j < secondHalf.length) sortedArray.push(secondHalf[j++]);
-	return sortedArray;
-};
+// 	const middleIndex = Math.floor(array.length / 2);
+// 	const firstHalf = mergeSort(array.slice(0, middleIndex));
+// 	const secondHalf = mergeSort(array.slice(middleIndex));
+// 	const sortedArray = [];
+// 	let i = 0,
+// 		j = 0;
+// 	while (i < firstHalf.length && j < secondHalf.length) {
+// 		if (firstHalf[i] < secondHalf[j]) {
+// 			sortedArray.push(firstHalf[i++]);
+// 		} else {
+// 			sortedArray.push(secondHalf[j++]);
+// 		}
+// 	}
+// 	while (i < firstHalf.length) sortedArray.push(firstHalf[i++]);
+// 	while (j < secondHalf.length) sortedArray.push(secondHalf[j++]);
+// 	return sortedArray;
+// };
 
 export const bubbleSort = array => {
 	const animations = [];
@@ -90,19 +90,21 @@ export const insertionSort = array => {
 	const animations = [];
 	let obj = {};
 	for (let i = 1; i < array.length; i++) {
-		while(array[i] < array[i - 1]) {
-			obj = {
-				indices: {firstIndex: i, secondIndex: i - 1},
-				values: {firstValue: array[i], secondValue: array[i - 1]},
-				swap: true,
-				color: true,
+		// Need to know if its being sorted at all
+			while(array[i] < array[i - 1]) {
+				obj = {
+					indices: {firstIndex: i, secondIndex: i - 1},
+					values: {firstValue: array[i], secondValue: array[i - 1]},
+					swap: true,
+					color: true,
+				}
+				let temp = array[i];
+				array[i] = array[i - 1];
+				array[i - 1] = temp;
+				animations.push(obj);
+				i--;
 			}
-			let temp = array[i];
-			array[i] = array[i - 1];
-			array[i - 1] = temp;
-			animations.push(obj);
-			i--;
-		}
+
 	}
 	return animations;
 };

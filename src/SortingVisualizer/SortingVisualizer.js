@@ -12,9 +12,9 @@ const COLOR_ACTIVE_TWO = '#9A12B3'; // LJUBICASTA
 
 export default class SortingVisualizer extends Component {
 	state = {
-		array: [100, 500, 200, 300, 600, 400],
+		array: [100, 200, 300, 400, 600, 500 ],
 		max: 5,
-		speed: 10
+		speed: 1000
 	};
 
 	componentDidMount() {
@@ -128,7 +128,7 @@ export default class SortingVisualizer extends Component {
 			for (let i = 0; i < length; i++) {
 				array.push(this.randomIntFromInterval(5, 1000));
 			}
-			const mergeSortedArray = SortingAlgorithms.mergeSort(array);
+			const mergeSortedArray = SortingAlgorithms.bubbleSort(array);
 			const javaScriptSortedArray = array.slice().sort((a, b) => a - b);
 			console.log(this.arraysAreEqual(javaScriptSortedArray, mergeSortedArray));
 		}
