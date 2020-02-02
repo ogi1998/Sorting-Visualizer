@@ -44,7 +44,7 @@ const HeaderFooter = props => {
           />
         </div>
         <button className="btn" onClick={resetAll}>
-          New Array
+          Generate New Options
         </button>
         <button className="btn" onClick={bubbleSort}>
           Bubble Sort
