@@ -61,6 +61,9 @@ header h3 {
   color: #f1c40f;
   color: orange;
 }
+.btn:disabled {
+  color: red;
+}
 footer {
   display: flex;
   flex-direction: row;
