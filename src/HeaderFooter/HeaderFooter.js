@@ -17,7 +17,7 @@ const HeaderFooter = props => {
     res = (
       <header>
         <h3>{title}</h3>
-        <div className="length">
+        <div className="length-container">
           <label>Length: </label>
           <input
             value={max}
@@ -28,7 +28,7 @@ const HeaderFooter = props => {
             id="length-input"
           />
         </div>
-        <div className="speed">
+        <div className="speed-container">
           <label htmlFor="speed">Speed: </label>
           <label htmlFor="speed">1s</label>
           <input type="radio" value="1000" name="speed" id="speed1" />
@@ -44,7 +44,7 @@ const HeaderFooter = props => {
           />
         </div>
         <button className="btn" onClick={resetAll}>
-          Generate New Array
+          New Array
         </button>
         <button className="btn" onClick={bubbleSort}>
           Bubble Sort
