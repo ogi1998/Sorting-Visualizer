@@ -30,11 +30,11 @@ const HeaderFooter = props => {
         </div>
         <div className="speed-container">
           <label htmlFor="speed">Speed: </label>
-          <label htmlFor="speed">1s</label>
+          <label htmlFor="speed">Slow</label>
           <input type="radio" value="1000" name="speed" id="speed1" />
-          <label htmlFor="speed">100ms</label>
+          <label htmlFor="speed">Fast</label>
           <input type="radio" value="100" name="speed" id="speed1" />
-          <label htmlFor="speed">10ms</label>
+          <label htmlFor="speed">Very Fast</label>
           <input
             defaultChecked
             type="radio"
