@@ -18,8 +18,7 @@ export default class SortingVisualizer extends Component {
   };
 
   componentDidMount() {
-    this.resetArray();
-    this.setSpeed();
+    this.resetAll();
   }
   resetArray() {
     const { max } = this.state;
@@ -56,80 +55,34 @@ export default class SortingVisualizer extends Component {
     this.resetArray();
     this.setSpeed();
   }
+  sort(type, func) {
+    const { speed } = this.state;
+    this.changeButtonState();
+    const animations = func(this.state.array);
+    SortingAnimations.animate(
+      animations,
+      speed,
+      type,
+      COLOR_DEFAULT,
+      COLOR_FINISH,
+      COLOR_SORTED,
+      COLOR_ACTIVE_ONE,
+      COLOR_ACTIVE_TWO,
+      this.changeButtonState
+    );
 
-  bubbleSort() {
-    const { speed } = this.state;
-    this.disableButtons();
-    const animations = SortingAlgorithms.bubbleSort(this.state.array);
-    SortingAnimations.animate(
-      animations,
-      speed,
-      "bubble",
-      COLOR_DEFAULT,
-      COLOR_FINISH,
-      COLOR_SORTED,
-      COLOR_ACTIVE_ONE,
-      COLOR_ACTIVE_TWO,
-      this.enableButtons
-    );
-  }
-  selectionSort() {
-    const { speed } = this.state;
-    this.disableButtons();
-    const btns = document.getElementsByClassName("btn");
-    for (let i = 0; i < btns.length; i++) {
-      btns[i].disabled = true;
-    }
-    const animations = SortingAlgorithms.selectionSort(this.state.array);
-    SortingAnimations.animate(
-      animations,
-      speed,
-      "selection",
-      COLOR_DEFAULT,
-      COLOR_FINISH,
-      COLOR_SORTED,
-      COLOR_ACTIVE_ONE,
-      COLOR_ACTIVE_TWO,
-      this.enableButtons
-    );
-  }
-  insertionSort() {
-    const { speed } = this.state;
-    this.disableButtons();
-    const btns = document.getElementsByClassName("btn");
-    for (let i = 0; i < btns.length; i++) {
-      btns[i].disabled = true;
-    }
-    const animations = SortingAlgorithms.insertionSort(this.state.array);
-    SortingAnimations.animate(
-      animations,
-      speed,
-      "insertion",
-      COLOR_DEFAULT,
-      COLOR_FINISH,
-      COLOR_SORTED,
-      COLOR_ACTIVE_ONE,
-      COLOR_ACTIVE_TWO,
-      this.enableButtons
-    );
   }
   randomIntFromInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
-  disableButtons() {
+  changeButtonState() {
     const btns = document.getElementsByClassName("btn");
-    for (let i = 0; i < btns.length; i++) {
-      btns[i].disabled = true;
-    }
-  }
-  enableButtons() {
-    const btns = document.getElementsByClassName("btn");
-    for (let i = 0; i < btns.length; i++) {
-      btns[i].disabled = false;
+    for(let i = 0; i < btns.length; i++) {
+      btns[i].disabled = !btns[i].disabled;
     }
   }
   changeLength(value) {
-    this.setState({ max: value});
+    this.setState({ max: value });
   }
   render() {
     const { array, max } = this.state;
@@ -141,9 +94,9 @@ export default class SortingVisualizer extends Component {
           max={max}
           changeLength={this.changeLength.bind(this)}
           resetAll={this.resetAll.bind(this)}
-          bubbleSort={this.bubbleSort.bind(this)}
-          selectionSort={this.selectionSort.bind(this)}
-          insertionSort={this.insertionSort.bind(this)}
+          bubbleSort={this.sort.bind(this, "bubble", SortingAlgorithms.bubbleSort)}
+          selectionSort={this.sort.bind(this, "selection", SortingAlgorithms.selectionSort)}
+          insertionSort={this.sort.bind(this, "insertion", SortingAlgorithms.insertionSort)}
         />
         <main>
           <div className="array-container">

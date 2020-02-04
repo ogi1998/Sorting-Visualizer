@@ -2,16 +2,7 @@ import React from "react";
 import "./HeaderFooter.css";
 
 const HeaderFooter = props => {
-  const {
-    type,
-    title,
-    max,
-    changeLength,
-    resetAll,
-    bubbleSort,
-    selectionSort,
-    insertionSort
-  } = props;
+  const {type,title,max,changeLength,resetAll,bubbleSort,selectionSort,insertionSort} = props;
   let res;
   if (type === "header") {
     res = (
