@@ -10,8 +10,7 @@ export const bubbleSort = array => {
 				obj = {
 					indices: {firstIndex: j, secondIndex: j + 1},
 					values: {firstValue: array[j], secondValue: array[j + 1]},
-					swap: true,
-					color: false,
+					shouldSwap: true
 				}
 				let tmp = array[j];
 				array[j] = array[j + 1];
@@ -22,12 +21,10 @@ export const bubbleSort = array => {
 				obj = {
 					indices: {firstIndex: j, secondIndex: j + 1},
 					values: {firstValue: array[j], secondValue: array[j + 1]},
-					swap: false,
-					color: false,
 				}
 			}
 			if(j === length - i - 1) {
-				obj.color = true;
+				obj.iterationFinished = true;
 			}
 			if (shouldPush) animations.push(obj);
 		}
@@ -48,17 +45,14 @@ export const selectionSort = array => {
 		obj = {
 			indices: {firstIndex: min, secondIndex: i},
 			values: {firstValue: array[min], secondValue: array[i]},
-			swap: true,
-			color: true,
+			shouldSwap: true,
+			iterationFinished: true,
 		}
         if (min !== i) {
 
             let tmp = array[i];
             array[i] = array[min];
 			array[min] = tmp;
-		}
-		if(i === array.length - i - 1) {
-			obj.color = true;
 		}
 		animations.push(obj);
 	}
@@ -73,8 +67,8 @@ export const insertionSort = array => {
 				obj = {
 					indices: {firstIndex: i, secondIndex: i - 1},
 					values: {firstValue: array[i], secondValue: array[i - 1]},
-					swap: true,
-					color: true,
+					shouldSwap: true,
+					iterationFinished: true,
 				}
 				let temp = array[i];
 				array[i] = array[i - 1];
